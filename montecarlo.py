@@ -28,9 +28,9 @@ class MonteCarlo():
         self.coordTupleList = []; self.valList = []
 
     def monteCarloIntegrate(self):
-        offset = 5.0
-        # print(self.n)
+        # n points
         for i in range(self.n):
+            # generate a random point
             xCur = random.uniform(self.xMin, self.xMax)
             yCur = random.uniform(self.yMin, self.yMax)
             zCur = random.uniform(self.zMin, self.zMax)
@@ -42,15 +42,17 @@ class MonteCarlo():
                 xCur = 0.0000001
                 yCur = 0.0000001
 
-            LHV = self.func1(xCur + (offset / 2), yCur, zCur)
-            RHV = self.func2(xCur - (offset / 2), yCur, zCur)
-            prod = LHV * RHV
-            self.valList.append(prod)
+            # eval function at this point
+            fval = self.func(xCur,yCur,zCur,self.spacing)
+            # save it so we can calc an average
+            self.valList.append(fval)
 
+        # volume of our defined space
         vol = BoundingBox.volumeFromLimits(
-            self.xMin,self.xMax,self.yMin,self.yMax,self.zMin,self.zMax)
+            self.xMin,self.xMax,self.yMin,self.yMax,self.zMin,self.zMax
+        )
         avg = self.calculateAvg()
-        # Use average value theorem
+        # Use average value theorem: Integral = Volume * Avg Value
         self.integral = vol * avg
 
     def calculateAvg(self):
