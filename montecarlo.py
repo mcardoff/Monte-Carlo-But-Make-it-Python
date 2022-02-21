@@ -1,4 +1,6 @@
 import numpy as np
+import random as random
+from enum import Enum
 
 class Spin(Enum):
     Up = 1
