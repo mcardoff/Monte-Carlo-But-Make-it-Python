@@ -1,6 +1,5 @@
 import numpy as np
 
-
 def psi1s(x,y,z):
     r,theta,phi = convertSpherical(x,y,z)
     return psi1sSpherical(r,theta,phi)
