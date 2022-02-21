@@ -19,19 +19,13 @@ class BoundingBox():
         return BoundingBox.calculateVolume(l1,l2,l3)
 
 class MonteCarlo():
-    def __init__(self, xMin, xMax, yMin, yMax, zMin, zMax, n, func1, func2):
-        self.xMin = xMin
-        self.xMax = xMax
-        self.yMin = yMin
-        self.yMax = yMax
-        self.zMin = zMin
-        self.zMax = zMax
-        self.n = n
-        self.func1 = func1
-        self.func2 = func2
-        self.integral = 0.0
-        self.coordTupleList = []
-        self.valList = []
+    def __init__(self, xMin, xMax, yMin, yMax, zMin, zMax, n, spacing, func):
+        assert(isinstance(n,int))
+        self.xMin = xMin; self.xMax = xMax;
+        self.yMin = yMin; self.yMax = yMax
+        self.zMin = zMin; self.zMax = zMax
+        self.n = n; self.spacing = spacing; self.func = func; self.integral = 0.0
+        self.coordTupleList = []; self.valList = []
 
     def monteCarloIntegrate(self):
         offset = 5.0
